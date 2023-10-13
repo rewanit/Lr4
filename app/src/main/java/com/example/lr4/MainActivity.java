@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         MusicManager.release();
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         Button settingsButton = findViewById(R.id.SettingsButton);
 
 
-        MusicManager.initialize(this); // Инициализируем музыку
+        MusicManager.initialize(this);
 
         if (isMusicEnabled()) {
             MusicManager.startMusic();

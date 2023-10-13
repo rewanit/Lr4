@@ -27,11 +27,11 @@ public class FindPairActivity extends AppCompatActivity {
     private int firstCardImageId, secondCardImageId;
     private int cardsMatched = 0;
     private int gridSize = 4;
-    private boolean isGameFinished = false; // Флаг для отслеживания окончания игры
+    private boolean isGameFinished = false;
     private int totalCards = gridSize * gridSize;
     private int maxAttempts = totalCards / 2 + 3;
     private boolean isComparing = false;
-    private int attempts = 0; // Ограничение на количество попыток
+    private int attempts = 0;
 
     private GridLayout gridLayout;
 
@@ -74,7 +74,7 @@ public class FindPairActivity extends AppCompatActivity {
 
     private void onCardClicked(ImageView card) {
         if (isComparing || isGameFinished) {
-            return; // Не принимаем клики во время сравнения
+            return;
         }
 
         String tag = card.getTag().toString();
@@ -104,13 +104,13 @@ public class FindPairActivity extends AppCompatActivity {
                         gameWon();
                     }
                 } else {
-                    isComparing = true; // Блокируем нажатия
-                    attempts++; // Увеличиваем количество попыток
+                    isComparing = true;
+                    attempts++;
                     if (attempts >= maxAttempts) {
                         gameLost();
                     }
 
-                    // Задержка перед сбросом
+
                     card.postDelayed(new Runnable() {
                         @Override
                         public void run() {
@@ -121,7 +121,7 @@ public class FindPairActivity extends AppCompatActivity {
                                 secondCard.setTag("unmatched:" + secondCardImageId);
                                 firstCard = null;
                                 secondCard = null;
-                                isComparing = false; // Разблокируем нажатия
+                                isComparing = false;
                             }
                         }
                     }, 1000);
@@ -131,17 +131,17 @@ public class FindPairActivity extends AppCompatActivity {
     }
 
     private void gameWon() {
-        isGameFinished = true; // Устанавливаем флаг окончания игры
-        int matchedPairs = cardsMatched / 2; // Рассчитываем количество угаданных пар
+        isGameFinished = true;
+        int matchedPairs = cardsMatched / 2; //
         String message = "Вы выиграли! Количество угаданных пар: " + matchedPairs;
 
-        // Создаем диалоговое окно
+
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(message)
-                .setCancelable(false) // Блокируем возможность закрытия окна без выбора
+                .setCancelable(false)
                 .setPositiveButton("Закрыть", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        // Обработка закрытия диалогового окна
+
                         dialog.dismiss();
                     }
                 });
@@ -150,17 +150,17 @@ public class FindPairActivity extends AppCompatActivity {
     }
 
     private void gameLost() {
-        isGameFinished = true; // Устанавливаем флаг окончания игры
-        int matchedPairs = cardsMatched / 2; // Рассчитываем количество угаданных пар
+        isGameFinished = true;
+        int matchedPairs = cardsMatched / 2;
         String message = "Вы проиграли! Попытки закончились. Количество угаданных пар: "+ matchedPairs;
 
-        // Создаем диалоговое окно
+
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(message)
-                .setCancelable(false) // Блокируем возможность закрытия окна без выбора
+                .setCancelable(false)
                 .setPositiveButton("Закрыть", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        // Обработка закрытия диалогового окна
+
                         dialog.dismiss();
                     }
                 });
